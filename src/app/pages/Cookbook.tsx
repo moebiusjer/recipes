@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BookOpen, ChefHat, Bookmark } from "lucide-react";
+import { ChefHat, Bookmark } from "lucide-react";
 import { RecipeCard } from "../components/RecipeCard";
 import { useNavigate } from "react-router";
 import { fetchCookbook, isAuthenticated, type CookbookResponse } from "../lib/api";

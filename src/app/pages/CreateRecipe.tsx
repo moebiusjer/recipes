@@ -96,7 +96,6 @@ export function CreateRecipe() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-           
             placeholder="e.g., Grandma's Chocolate Chip Cookies"
             required
           />
@@ -110,7 +109,6 @@ export function CreateRecipe() {
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-           
             placeholder="Brief description of your recipe..."
           />
         </div>
@@ -127,7 +125,6 @@ export function CreateRecipe() {
                 type="url"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-               
                 placeholder="https://example.com/image.jpg (optional)"
               />
             </div>
@@ -137,7 +134,6 @@ export function CreateRecipe() {
               <img
                 src={imageUrl}
                 alt="Recipe preview"
-               
                 onError={(e) => {
                   e.currentTarget.src = TURKEY_LEG_IMAGE;
                 }}
@@ -148,7 +144,6 @@ export function CreateRecipe() {
               <img
                 src={TURKEY_LEG_IMAGE}
                 alt="Default turkey leg"
-               
               />
               <p>
                 No image provided? We'll use a fun turkey leg icon by default!
@@ -167,7 +162,6 @@ export function CreateRecipe() {
               type="number"
               value={cookTime}
               onChange={(e) => setCookTime(e.target.value)}
-             
               placeholder="e.g., 30"
               required
             />
@@ -181,7 +175,6 @@ export function CreateRecipe() {
               type="number"
               value={servings}
               onChange={(e) => setServings(e.target.value)}
-             
               placeholder="4"
               required
             />
@@ -194,7 +187,6 @@ export function CreateRecipe() {
             <button
               type="button"
               onClick={addIngredient}
-             
             >
               <Plus />
               Add Ingredient
@@ -207,7 +199,6 @@ export function CreateRecipe() {
                   type="text"
                   value={ingredient}
                   onChange={(e) => updateIngredient(index, e.target.value)}
-                 
                   placeholder={`Ingredient ${index + 1}`}
                   required
                 />
@@ -215,7 +206,6 @@ export function CreateRecipe() {
                   <button
                     type="button"
                     onClick={() => removeIngredient(index)}
-                   
                   >
                     <X />
                   </button>
@@ -231,7 +221,6 @@ export function CreateRecipe() {
             <button
               type="button"
               onClick={addInstruction}
-             
             >
               <Plus />
               Add Step
@@ -246,7 +235,6 @@ export function CreateRecipe() {
                 <textarea
                   value={instruction}
                   onChange={(e) => updateInstruction(index, e.target.value)}
-                 
                   placeholder={`Step ${index + 1} instructions...`}
                   required
                 />
@@ -254,7 +242,6 @@ export function CreateRecipe() {
                   <button
                     type="button"
                     onClick={() => removeInstruction(index)}
-                   
                   >
                     <X />
                   </button>
@@ -268,14 +255,12 @@ export function CreateRecipe() {
           <button
             type="submit"
             disabled={isSubmitting}
-           
           >
             {isSubmitting ? "Publishing..." : "Publish Recipe"}
           </button>
           <button
             type="button"
             onClick={handleReset}
-           
           >
             Reset
           </button>

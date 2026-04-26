@@ -1,6 +1,5 @@
-import React from "react";
 import { useParams } from "react-router";
-import { Clock, Users, Heart, Bookmark, ListCheck, ChefHat } from "lucide-react";
+import { Clock, Users, Heart, Bookmark, ChefHat } from "lucide-react";
 import { ImageWithFallback } from "../components/ImageWithFallback";
 import { useEffect, useState } from "react";
 import { fetchCookbook, fetchRecipeDetail, isAuthenticated, saveRecipe, unsaveRecipe, type RecipeFull } from "../lib/api";
@@ -84,7 +83,6 @@ export function RecipeDetail() {
           <ImageWithFallback
             src={recipe.image_url || ""}
             alt={recipe.name}
-           
           />
         </div>
 
@@ -101,7 +99,6 @@ export function RecipeDetail() {
                 onClick={() => setIsLiked(!isLiked)}
                 title="Likes the recipe"
                 aria-label="Likes the recipe"
-               
               >
                 <Heart />
               </button>
@@ -110,13 +107,9 @@ export function RecipeDetail() {
                 disabled={isSaving}
                 title="This recipe will be added to favorites"
                 aria-label="This recipe will be added to favorites"
-               
               >
                 <Bookmark />
               </button>
-              {/* <button>
-                <ListCheck />
-              </button> */}
             </div>
           </div>
           {saveError ? <p>{saveError}</p> : null}

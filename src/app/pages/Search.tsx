@@ -55,12 +55,10 @@ export function Search() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by recipe name, ingredients, or cuisine..."
-             
             />
           </div>
           <button
             onClick={() => setShowFilters(!showFilters)}
-           
           >
             <SlidersHorizontal />
             Filters
@@ -75,7 +73,6 @@ export function Search() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                 
                 >
                   {category}
                 </button>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, MessageSquare, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 
 export function Contact() {
   const [name, setName] = useState("");
@@ -39,10 +39,6 @@ export function Contact() {
                   <h3>Email Us</h3>
                   <p>support@recipebook.com</p>
                 </div>
-              <div>
-                </div>
-                <div>
-                </div>
               </div>
             </div>
 
@@ -79,7 +75,6 @@ export function Contact() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                   
                     placeholder="Your name"
                     required
                   />
@@ -94,7 +89,6 @@ export function Contact() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                   
                     placeholder="your.email@example.com"
                     required
                   />
@@ -108,7 +102,6 @@ export function Contact() {
                     id="message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                   
                     placeholder="Tell us what's on your mind..."
                     required
                   />
@@ -116,7 +109,6 @@ export function Contact() {
 
                 <button
                   type="submit"
-                 
                 >
                   <Send />
                   Send Message

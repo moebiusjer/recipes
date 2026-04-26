@@ -90,13 +90,12 @@ export function Profile() {
               </div>
               <div>
                 <h1>{user.username}</h1>
-                <p>{user?.email}</p>
+                <p>{user.email}</p>
                 <p>@{profile.username}</p>
               </div>
             </div>
             <button
               onClick={handleEditClick}
-             
             >
               <Settings />
               Edit Profile
@@ -147,7 +146,6 @@ export function Profile() {
               <h2>Edit Profile</h2>
               <button
                 onClick={() => setShowEditModal(false)}
-               
               >
                 <X />
               </button>
@@ -163,7 +161,6 @@ export function Profile() {
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                 
                   required
                 />
               </div>
@@ -177,7 +174,6 @@ export function Profile() {
                   type="email"
                   value={editEmail}
                   onChange={(e) => setEditEmail(e.target.value)}
-                 
                   required
                 />
               </div>
@@ -185,14 +181,12 @@ export function Profile() {
               <div>
                 <button
                   type="submit"
-                 
                 >
                   Save Changes
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowEditModal(false)}
-                 
                 >
                   Cancel
                 </button>

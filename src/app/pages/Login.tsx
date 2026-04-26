@@ -1,4 +1,3 @@
-import React from "react";
 import { type FormEvent, useState } from "react";
 import { useNavigate } from "react-router";
 import { CookingPot } from "lucide-react";
@@ -63,7 +62,6 @@ export function Login() {
                 setMode("signin");
                 setError("");
               }}
-             
             >
               Sign In
             </button>
@@ -73,7 +71,6 @@ export function Login() {
                 setMode("signup");
                 setError("");
               }}
-             
             >
               Create Account
             </button>
@@ -90,7 +87,6 @@ export function Login() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                 
                   placeholder="Choose a username"
                   required
                 />
@@ -106,7 +102,6 @@ export function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-               
                 placeholder="Enter your email"
                 required
               />
@@ -121,7 +116,6 @@ export function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-               
                 placeholder="Enter your password"
                 required
               />
@@ -130,7 +124,6 @@ export function Login() {
             <button
               type="submit"
               disabled={isSubmitting}
-             
             >
               {isSubmitting
                 ? mode === "signin"
@@ -146,7 +139,6 @@ export function Login() {
           <div>
             <button
               onClick={handleGuestMode}
-             
             >
               Continue as Guest
             </button>
