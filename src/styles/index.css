@@ -1,3 +1,132 @@
-@import './fonts.css';
-@import './tailwind.css';
-@import './theme.css';
+* {
+	box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+	margin: 0;
+	padding: 0;
+	min-height: 100%;
+}
+
+body {
+	font-family: sans-serif;
+	line-height: 1.5;
+}
+
+a {
+	color: inherit;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+button,
+input,
+textarea,
+select {
+	font: inherit;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 1rem;
+}
+
+.top-bar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem;
+	justify-content: space-between;
+}
+
+.site-title {
+	margin: 0;
+	font-size: 1.25rem;
+}
+
+.nav-list {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-list a,
+.nav-list button {
+	text-decoration: none;
+	border: 1px solid #bbb;
+	background: #fff;
+	color: #111;
+	padding: 0.25rem 0.5rem;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.nav-list a.active {
+	font-weight: 700;
+}
+
+header,
+footer {
+	border-bottom: 1px solid #ddd;
+}
+
+footer {
+	border-top: 1px solid #ddd;
+	border-bottom: none;
+	margin-top: 2rem;
+}
+
+main {
+	padding-top: 1rem;
+}
+
+.recipe-card-link {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
+
+.recipe-card {
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	overflow: hidden;
+	background: #fff;
+}
+
+.recipe-card-image {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}
+
+.recipe-card-body {
+	padding: 0.75rem;
+}
+
+.recipe-card-body h3 {
+	margin: 0 0 0.5rem;
+	font-size: 1rem;
+}
+
+.recipe-card-meta {
+	display: flex;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+	color: #444;
+	font-size: 0.9rem;
+}
+
+.recipe-card-meta span {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+}

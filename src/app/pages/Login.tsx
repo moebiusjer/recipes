@@ -41,31 +41,29 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-8rem)] flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            <CookingPot className="w-12 h-12 text-orange-600" />
+    <div>
+      <div>
+        <div>
+          <div>
+            <CookingPot />
           </div>
-          <h1 className="text-3xl mb-2">{mode === "signin" ? "Welcome Back!" : "Create Your Account"}</h1>
-          <p className="text-gray-600">
+          <h1>{mode === "signin" ? "Welcome Back!" : "Create Your Account"}</h1>
+          <p>
             {mode === "signin"
               ? "Sign in to save and access your recipes"
               : "Sign up to save recipes and build your cookbook"}
           </p>
         </div>
 
-        <div className="bg-orange-200 rounded-lg shadow-md p-8">
-          <div className="grid grid-cols-2 gap-2 mb-6">
+        <div>
+          <div>
             <button
               type="button"
               onClick={() => {
                 setMode("signin");
                 setError("");
               }}
-              className={`rounded-lg py-2 text-sm ${
-                mode === "signin" ? "bg-orange-600 text-white" : "bg-white text-gray-700 hover:bg-gray-100"
-              }`}
+             
             >
               Sign In
             </button>
@@ -75,18 +73,16 @@ export function Login() {
                 setMode("signup");
                 setError("");
               }}
-              className={`rounded-lg py-2 text-sm ${
-                mode === "signup" ? "bg-orange-600 text-white" : "bg-white text-gray-700 hover:bg-gray-100"
-              }`}
+             
             >
               Create Account
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit}>
             {mode === "signup" ? (
               <div>
-                <label htmlFor="username" className="block text-sm font-medium mb-2">
+                <label htmlFor="username">
                   Username
                 </label>
                 <input
@@ -94,7 +90,7 @@ export function Login() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                 
                   placeholder="Choose a username"
                   required
                 />
@@ -102,7 +98,7 @@ export function Login() {
             ) : null}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label htmlFor="email">
                 Email
               </label>
               <input
@@ -110,14 +106,14 @@ export function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+               
                 placeholder="Enter your email"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-2">
+              <label htmlFor="password">
                 Password
               </label>
               <input
@@ -125,7 +121,7 @@ export function Login() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+               
                 placeholder="Enter your password"
                 required
               />
@@ -134,7 +130,7 @@ export function Login() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg transition-colors"
+             
             >
               {isSubmitting
                 ? mode === "signin"
@@ -145,12 +141,12 @@ export function Login() {
                   : "Create Account"}
             </button>
           </form>
-          {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
+          {error ? <p>{error}</p> : null}
 
-          <div className="mt-6 text-center">
+          <div>
             <button
               onClick={handleGuestMode}
-              className="text-orange-600 hover:text-orange-700 text-sm"
+             
             >
               Continue as Guest
             </button>

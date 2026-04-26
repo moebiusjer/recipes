@@ -70,87 +70,83 @@ export function RecipeDetail() {
   };
 
   if (isLoading) {
-    return <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">Loading recipe...</div>;
+    return <div>Loading recipe...</div>;
   }
 
   if (error || !recipe) {
-    return <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-red-600">{error || "Recipe not found."}</div>;
+    return <div>{error || "Recipe not found."}</div>;
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="aspect-[16/9] overflow-hidden bg-gray-100">
+    <div>
+      <div>
+        <div>
           <ImageWithFallback
             src={recipe.image_url || ""}
             alt={recipe.name}
-            className="w-full h-full object-cover"
+           
           />
         </div>
 
-        <div className="p-8">
-          <div className="flex items-start justify-between mb-4">
+        <div>
+          <div>
             <div>
-              <h1 className="text-4xl mb-3">{recipe.name}</h1>
-              <p className="text-gray-600">
+              <h1>{recipe.name}</h1>
+              <p>
                 {recipe.cuisine ? `${recipe.cuisine} cuisine` : "Recipe from the community"}
               </p>
             </div>
-            <div className="flex gap-2">
+            <div>
               <button
                 onClick={() => setIsLiked(!isLiked)}
                 title="Likes the recipe"
                 aria-label="Likes the recipe"
-                className={`p-3 rounded-lg border transition-colors ${
-                  isLiked ? "bg-red-50 border-red-500" : "hover:bg-gray-50"
-                }`}
+               
               >
-                <Heart className={`w-5 h-5 ${isLiked ? "fill-red-500 text-red-500" : "text-gray-600"}`} />
+                <Heart />
               </button>
               <button
                 onClick={handleSaveToggle}
                 disabled={isSaving}
                 title="This recipe will be added to favorites"
                 aria-label="This recipe will be added to favorites"
-                className={`p-3 rounded-lg border transition-colors ${
-                  isSaved ? "bg-orange-50 border-orange-500" : "hover:bg-gray-50"
-                }`}
+               
               >
-                <Bookmark className={`w-5 h-5 ${isSaved ? "text-orange-600" : "text-gray-600"}`} />
+                <Bookmark />
               </button>
-              {/* <button className="p-3 rounded-lg border hover:bg-gray-50 transition-colors">
-                <ListCheck className="w-5 h-5 text-gray-600" />
+              {/* <button>
+                <ListCheck />
               </button> */}
             </div>
           </div>
-          {saveError ? <p className="mb-4 text-sm text-red-600">{saveError}</p> : null}
+          {saveError ? <p>{saveError}</p> : null}
 
-          <div className="flex items-center gap-6 py-4 border-y mb-8">
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-gray-600" />
-              <span className="font-medium">{recipe.cook_time_minutes ?? 0} min</span>
+          <div>
+            <div>
+              <Clock />
+              <span>{recipe.cook_time_minutes ?? 0} min</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-gray-600" />
-              <span className="font-medium">{recipe.servings ?? 0} servings</span>
+            <div>
+              <Users />
+              <span>{recipe.servings ?? 0} servings</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Heart className="w-5 h-5 text-red-500" />
-              <span className="font-medium">{recipe.review_count} reviews</span>
+            <div>
+              <Heart />
+              <span>{recipe.review_count} reviews</span>
             </div>
-            <div className="flex items-center gap-2 ml-auto">
-              <ChefHat className="w-5 h-5 text-orange-600" />
-              <span className="font-medium text-orange-600">{recipe.difficulty || "Unknown"}</span>
+            <div>
+              <ChefHat />
+              <span>{recipe.difficulty || "Unknown"}</span>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div>
             <div>
-              <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
-              <ul className="space-y-3">
+              <h2>Ingredients</h2>
+              <ul>
                 {recipe.ingredients.map((ingredient, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-orange-600 rounded-full mt-2 flex-shrink-0" />
+                  <li key={index}>
+                    <div />
                     <span>{ingredient.original_text}</span>
                   </li>
                 ))}
@@ -158,14 +154,14 @@ export function RecipeDetail() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-semibold mb-4">Instructions</h2>
-              <ol className="space-y-4">
+              <h2>Instructions</h2>
+              <ol>
                 {recipe.instructions.map((instruction, index) => (
-                  <li key={index} className="flex gap-4">
-                    <span className="flex-shrink-0 w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-semibold">
+                  <li key={index}>
+                    <span>
                       {index + 1}
                     </span>
-                    <span className="pt-1">{instruction.text}</span>
+                    <span>{instruction.text}</span>
                   </li>
                 ))}
               </ol>

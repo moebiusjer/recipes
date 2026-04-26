@@ -1,6 +1,5 @@
 import { Outlet, Link, useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import { Search, BookOpen, User, Home, Plus, Contact as ContactIcon, LogOut, LogIn, CookingPot } from "lucide-react";
 import { clearAuthToken, isAuthenticated } from "../lib/api";
 
 export function Layout() {
@@ -22,89 +21,43 @@ export function Layout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <nav className="border-b bg-orange-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link to="/" className="flex items-center gap-2 font-semibold text-xl">
-              <CookingPot className="w-6 h-6 text-orange-600" />
-              RecipeWorld
-            </Link>
-
-            <div className="flex items-center gap-6">
-              <Link
-                to="/"
-                className={`flex items-center gap-2 transition-colors ${isActive("/") ? "text-orange-600" : "text-gray-600 hover:text-orange-600"}`}
-              >
-                <Home className="w-4 h-4" />
-                Home
-              </Link>
-              <Link
-                to="/search"
-                className={`flex items-center gap-2 transition-colors ${isActive("/search") ? "text-orange-600" : "text-gray-600 hover:text-orange-600"}`}
-              >
-                <Search className="w-4 h-4" />
-                Search
-              </Link>
-              <Link
-                to="/cookbook"
-                className={`flex items-center gap-2 transition-colors ${isActive("/cookbook") ? "text-orange-600" : "text-gray-600 hover:text-orange-600"}`}
-              >
-                <BookOpen className="w-4 h-4" />
-                Cookbook
-              </Link>
-              <Link
-                to="/create"
-                className={`flex items-center gap-2 transition-colors ${isActive("/create") ? "text-orange-600" : "text-gray-600 hover:text-orange-600"}`}
-              >
-                <Plus className="w-4 h-4" />
-                Create
-              </Link>
-              <Link
-                to="/contact"
-                className={`flex items-center gap-2 transition-colors ${isActive("/contact") ? "text-orange-600" : "text-gray-600 hover:text-orange-600"}`}
-              >
-                <ContactIcon className="w-4 h-4" />
-                Contact
-              </Link>
-              {isLoggedIn ? (
-                <>
-                  <Link
-                    to="/profile"
-                    className={`flex items-center gap-2 transition-colors ${isActive("/profile") ? "text-orange-600" : "text-gray-600 hover:text-orange-600"}`}
-                  >
-                    <User className="w-4 h-4" />
-                    Profile
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="flex items-center gap-2 text-gray-600 hover:text-orange-600 transition-colors"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <Link
-                  to="/login"
-                  className={`flex items-center gap-2 transition-colors ${isActive("/login") ? "text-orange-600" : "text-gray-600 hover:text-orange-600"}`}
-                >
-                  <LogIn className="w-4 h-4" />
-                  Login
-                </Link>
-              )}
-            </div>
+    <div className="app-shell">
+      <header>
+        <div className="container">
+          <div className="top-bar">
+            <h1 className="site-title">RecipeWorld</h1>
+            <nav aria-label="Main navigation">
+              <ul className="nav-list">
+                <li><Link className={isActive("/") ? "active" : ""} to="/">Home</Link></li>
+                <li><Link className={isActive("/search") ? "active" : ""} to="/search">Search</Link></li>
+                <li><Link className={isActive("/cookbook") ? "active" : ""} to="/cookbook">Cookbook</Link></li>
+                <li><Link className={isActive("/create") ? "active" : ""} to="/create">Create</Link></li>
+                <li><Link className={isActive("/contact") ? "active" : ""} to="/contact">Contact</Link></li>
+                {isLoggedIn ? (
+                  <>
+                    <li><Link className={isActive("/profile") ? "active" : ""} to="/profile">Profile</Link></li>
+                    <li>
+                      <button type="button" onClick={handleLogout}>Logout</button>
+                    </li>
+                  </>
+                ) : (
+                  <li><Link className={isActive("/login") ? "active" : ""} to="/login">Login</Link></li>
+                )}
+              </ul>
+            </nav>
           </div>
         </div>
-      </nav>
+      </header>
 
-      <main className="flex-1">
-        <Outlet />
+      <main>
+        <div className="container">
+          <Outlet />
+        </div>
       </main>
 
-      <footer className="border-t bg-orange-100 py-8 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm">
-          © 2026 RecipeWorld. All rights reserved.
+      <footer>
+        <div className="container">
+          <p>© 2026 RecipeWorld. All rights reserved.</p>
         </div>
       </footer>
     </div>

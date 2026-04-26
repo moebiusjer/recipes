@@ -72,59 +72,59 @@ export function Profile() {
   };
 
   if (pageLoading) {
-    return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">Loading profile...</div>;
+    return <div>Loading profile...</div>;
   }
 
   if (error || !profile || !cookbook || !user) {
-    return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-red-600">{error || "Could not load profile."}</div>;
+    return <div>{error || "Could not load profile."}</div>;
   }
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-orange-200 rounded-lg shadow-md p-8 mb-8">
-          <div className="flex items-start justify-between">
-            <div className="flex items-center gap-6">
-              <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center">
-                <User className="w-12 h-12 text-orange-600" />
+      <div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <User />
               </div>
               <div>
-                <h1 className="text-3xl mb-2">{user.username}</h1>
-                <p className="text-gray-600 mb-1">{user?.email}</p>
-                <p className="text-sm text-gray-500">@{profile.username}</p>
+                <h1>{user.username}</h1>
+                <p>{user?.email}</p>
+                <p>@{profile.username}</p>
               </div>
             </div>
             <button
               onClick={handleEditClick}
-              className="flex items-center gap-2 px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors"
+             
             >
-              <Settings className="w-4 h-4" />
+              <Settings />
               Edit Profile
             </button>
           </div>
 
-        <div className="grid grid-cols-3 gap-8 mt-8 pt-8 border-t">
-          <div className="text-center">
-            <div className="text-3xl font-semibold text-orange-600">{profile.posted_count}</div>
-            <div className="text-gray-600 text-sm">Recipes Created</div>
+        <div>
+          <div>
+            <div>{profile.posted_count}</div>
+            <div>Recipes Created</div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-semibold text-orange-600">{profile.saved_count}</div>
-            <div className="text-gray-600 text-sm">Recipes Saved</div>
+          <div>
+            <div>{profile.saved_count}</div>
+            <div>Recipes Saved</div>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-semibold text-orange-600">{profile.comments_count}</div>
-            <div className="text-gray-600 text-sm">Comments</div>
+          <div>
+            <div>{profile.comments_count}</div>
+            <div>Comments</div>
           </div>
         </div>
       </div>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-        <ListCheck className="w-6 h-6 text-orange-600" />
+      <section>
+        <h2>
+        <ListCheck />
         Completed Recipes
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
           {cookbook.posted.map((recipe) => (
             <RecipeCard
               key={recipe.id}
@@ -141,21 +141,21 @@ export function Profile() {
       </div>
 
       {showEditModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-semibold">Edit Profile</h2>
+        <div>
+          <div>
+            <div>
+              <h2>Edit Profile</h2>
               <button
                 onClick={() => setShowEditModal(false)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+               
               >
-                <X className="w-5 h-5" />
+                <X />
               </button>
             </div>
 
-            <form onSubmit={handleSaveProfile} className="space-y-6">
+            <form onSubmit={handleSaveProfile}>
               <div>
-                <label htmlFor="editName" className="block font-medium mb-2">
+                <label htmlFor="editName">
                   Name
                 </label>
                 <input
@@ -163,13 +163,13 @@ export function Profile() {
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                 
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="editEmail" className="block font-medium mb-2">
+                <label htmlFor="editEmail">
                   Email
                 </label>
                 <input
@@ -177,22 +177,22 @@ export function Profile() {
                   type="email"
                   value={editEmail}
                   onChange={(e) => setEditEmail(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                 
                   required
                 />
               </div>
 
-              <div className="flex gap-3 pt-4">
+              <div>
                 <button
                   type="submit"
-                  className="flex-1 bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg transition-colors"
+                 
                 >
                   Save Changes
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowEditModal(false)}
-                  className="px-6 py-2 border rounded-lg hover:bg-gray-50 transition-colors"
+                 
                 >
                   Cancel
                 </button>
