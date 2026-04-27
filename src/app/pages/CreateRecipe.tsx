@@ -16,6 +16,7 @@ export function CreateRecipe() {
   const [instructions, setInstructions] = useState([""]);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const addIngredient = () => setIngredients([...ingredients, ""]);
   const removeIngredient = (index: number) => {
@@ -40,12 +41,60 @@ export function CreateRecipe() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    const errors: Record<string, string> = {};
 
     if (!isAuthenticated()) {
       navigate("/login");
       return;
     }
 
+    // Validate title
+    if (!title.trim()) {
+      errors.title = "Recipe title is required";
+    } else if (title.trim().length < 3) {
+      errors.title = "Title must be at least 3 characters";
+    } else if (title.length > 100) {
+      errors.title = "Title must be 100 characters or less";
+    }
+
+    // Validate cook time
+    if (cookTime && Number.isNaN(Number.parseInt(cookTime, 10))) {
+      errors.cookTime = "Cook time must be a valid number";
+    } else if (cookTime && Number.parseInt(cookTime, 10) <= 0) {
+      errors.cookTime = "Cook time must be greater than 0";
+    } else if (cookTime && Number.parseInt(cookTime, 10) > 1440) {
+      errors.cookTime = "Cook time cannot exceed 1440 minutes (24 hours)";
+    }
+
+    // Validate servings
+    if (!servings) {
+      errors.servings = "Servings is required";
+    } else if (Number.isNaN(Number.parseInt(servings, 10))) {
+      errors.servings = "Servings must be a valid number";
+    } else if (Number.parseInt(servings, 10) <= 0) {
+      errors.servings = "Servings must be greater than 0";
+    } else if (Number.parseInt(servings, 10) > 100) {
+      errors.servings = "Servings cannot exceed 100";
+    }
+
+    // Validate ingredients
+    const validIngredients = ingredients.filter((i) => i.trim() !== "");
+    if (validIngredients.length === 0) {
+      errors.ingredients = "At least one ingredient is required";
+    }
+
+    // Validate instructions
+    const validInstructions = instructions.filter((i) => i.trim() !== "");
+    if (validInstructions.length === 0) {
+      errors.instructions = "At least one instruction step is required";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
+    setFieldErrors({});
     const parsedCookTime = Number.parseInt(cookTime, 10);
 
     setIsSubmitting(true);
@@ -56,14 +105,14 @@ export function CreateRecipe() {
         cuisine: description || null,
         cook_time_minutes: Number.isNaN(parsedCookTime) ? null : parsedCookTime,
         servings: Number.parseInt(servings, 10),
-        ingredients: ingredients.filter((i) => i.trim() !== ""),
-        instructions: instructions.filter((i) => i.trim() !== ""),
+        ingredients: validIngredients,
+        instructions: validInstructions,
         tags: [],
         meal_types: [],
       });
       navigate("/cookbook");
     } catch {
-      setError("Could not publish recipe.");
+      setError("Could not publish recipe. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -77,6 +126,7 @@ export function CreateRecipe() {
     setImageUrl("");
     setIngredients([""]);
     setInstructions([""]);
+    setFieldErrors({});
   };
 
   return (
@@ -85,6 +135,12 @@ export function CreateRecipe() {
         <h1 className="text-4xl font-bold mb-2">Create New Recipe</h1>
         <p className="text-gray-600 text-lg">Share your culinary creation with the world</p>
       </div>
+
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 border border-red-300 rounded-lg">
+          <p className="text-red-700 font-medium">{error}</p>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="max-w-3xl">
         <div className="mb-6">
@@ -95,11 +151,17 @@ export function CreateRecipe() {
             id="title"
             type="text"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              if (fieldErrors.title) setFieldErrors({ ...fieldErrors, title: "" });
+            }}
             placeholder="e.g., Grandma's Chocolate Chip Cookies"
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+              fieldErrors.title ? "border-red-500 focus:ring-red-500" : "focus:ring-orange-500"
+            }`}
             required
           />
+          {fieldErrors.title && <p className="mt-1 text-red-600 text-sm">{fieldErrors.title}</p>}
         </div>
 
         <div className="mb-6">
@@ -166,11 +228,17 @@ export function CreateRecipe() {
               id="cookTime"
               type="number"
               value={cookTime}
-              onChange={(e) => setCookTime(e.target.value)}
+              onChange={(e) => {
+                setCookTime(e.target.value);
+                if (fieldErrors.cookTime) setFieldErrors({ ...fieldErrors, cookTime: "" });
+              }}
               placeholder="e.g., 30"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                fieldErrors.cookTime ? "border-red-500 focus:ring-red-500" : "focus:ring-orange-500"
+              }`}
               required
             />
+            {fieldErrors.cookTime && <p className="mt-1 text-red-600 text-sm">{fieldErrors.cookTime}</p>}
           </div>
           <div>
             <label htmlFor="servings" className="block font-medium mb-2">
@@ -180,11 +248,17 @@ export function CreateRecipe() {
               id="servings"
               type="number"
               value={servings}
-              onChange={(e) => setServings(e.target.value)}
+              onChange={(e) => {
+                setServings(e.target.value);
+                if (fieldErrors.servings) setFieldErrors({ ...fieldErrors, servings: "" });
+              }}
               placeholder="4"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                fieldErrors.servings ? "border-red-500 focus:ring-red-500" : "focus:ring-orange-500"
+              }`}
               required
             />
+            {fieldErrors.servings && <p className="mt-1 text-red-600 text-sm">{fieldErrors.servings}</p>}
           </div>
         </div>
 
@@ -206,7 +280,10 @@ export function CreateRecipe() {
                 <input
                   type="text"
                   value={ingredient}
-                  onChange={(e) => updateIngredient(index, e.target.value)}
+                  onChange={(e) => {
+                    updateIngredient(index, e.target.value);
+                    if (fieldErrors.ingredients) setFieldErrors({ ...fieldErrors, ingredients: "" });
+                  }}
                   placeholder={`Ingredient ${index + 1}`}
                   className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                   required
@@ -214,7 +291,10 @@ export function CreateRecipe() {
                 {ingredients.length > 1 && (
                   <button
                     type="button"
-                    onClick={() => removeIngredient(index)}
+                    onClick={() => {
+                      removeIngredient(index);
+                      if (fieldErrors.ingredients) setFieldErrors({ ...fieldErrors, ingredients: "" });
+                    }}
                     className="px-3 py-2 text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors"
                   >
                     <X className="w-4 h-4" />
@@ -223,6 +303,7 @@ export function CreateRecipe() {
               </div>
             ))}
           </div>
+          {fieldErrors.ingredients && <p className="mt-2 text-red-600 text-sm">{fieldErrors.ingredients}</p>}
         </div>
 
         <div className="mb-6">
@@ -246,7 +327,10 @@ export function CreateRecipe() {
                 <div className="flex-1">
                   <textarea
                     value={instruction}
-                    onChange={(e) => updateInstruction(index, e.target.value)}
+                    onChange={(e) => {
+                      updateInstruction(index, e.target.value);
+                      if (fieldErrors.instructions) setFieldErrors({ ...fieldErrors, instructions: "" });
+                    }}
                     placeholder={`Step ${index + 1} instructions...`}
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                     required
@@ -255,7 +339,10 @@ export function CreateRecipe() {
                 {instructions.length > 1 && (
                   <button
                     type="button"
-                    onClick={() => removeInstruction(index)}
+                    onClick={() => {
+                      removeInstruction(index);
+                      if (fieldErrors.instructions) setFieldErrors({ ...fieldErrors, instructions: "" });
+                    }}
                     className="flex-shrink-0 px-3 py-2 text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors"
                   >
                     <X className="w-4 h-4" />
@@ -264,6 +351,7 @@ export function CreateRecipe() {
               </div>
             ))}
           </div>
+          {fieldErrors.instructions && <p className="mt-2 text-red-600 text-sm">{fieldErrors.instructions}</p>}
         </div>
 
         <div className="flex gap-3">
@@ -282,7 +370,6 @@ export function CreateRecipe() {
             Reset
           </button>
         </div>
-        {error ? <p className="mt-4 text-red-600">{error}</p> : null}
       </form>
     </div>
   );
