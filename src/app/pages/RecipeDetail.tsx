@@ -77,69 +77,72 @@ export function RecipeDetail() {
   }
 
   return (
-    <div>
-      <div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="grid md:grid-cols-2 gap-8">
         <div>
           <ImageWithFallback
             src={recipe.image_url || ""}
             alt={recipe.name}
+            className="w-full rounded-lg shadow-md"
           />
         </div>
 
         <div>
-          <div>
-            <div>
-              <h1>{recipe.name}</h1>
-              <p>
+          <div className="mb-6">
+            <div className="mb-4">
+              <h1 className="text-4xl font-bold mb-2">{recipe.name}</h1>
+              <p className="text-gray-600">
                 {recipe.cuisine ? `${recipe.cuisine} cuisine` : "Recipe from the community"}
               </p>
             </div>
-            <div>
+            <div className="flex gap-3">
               <button
                 onClick={() => setIsLiked(!isLiked)}
                 title="Likes the recipe"
                 aria-label="Likes the recipe"
+                className="p-2 rounded-lg border hover:bg-red-50 transition-colors"
               >
-                <Heart />
+                <Heart className={`w-6 h-6 ${isLiked ? "fill-red-500 text-red-500" : ""}`} />
               </button>
               <button
                 onClick={handleSaveToggle}
                 disabled={isSaving}
                 title="This recipe will be added to favorites"
                 aria-label="This recipe will be added to favorites"
+                className="p-2 rounded-lg border hover:bg-yellow-50 transition-colors disabled:opacity-50"
               >
-                <Bookmark />
+                <Bookmark className={`w-6 h-6 ${isSaved ? "fill-yellow-400 text-yellow-500" : ""}`} />
               </button>
             </div>
           </div>
-          {saveError ? <p>{saveError}</p> : null}
+          {saveError ? <p className="text-red-600 mb-4">{saveError}</p> : null}
 
-          <div>
-            <div>
-              <Clock />
-              <span>{recipe.cook_time_minutes ?? 0} min</span>
+          <div className="grid grid-cols-2 gap-4 mb-8 p-4 bg-orange-50 rounded-lg">
+            <div className="flex items-center gap-2">
+              <Clock className="w-5 h-5 text-orange-600" />
+              <span className="font-medium">{recipe.cook_time_minutes ?? 0} min</span>
             </div>
-            <div>
-              <Users />
-              <span>{recipe.servings ?? 0} servings</span>
+            <div className="flex items-center gap-2">
+              <Users className="w-5 h-5 text-orange-600" />
+              <span className="font-medium">{recipe.servings ?? 0} servings</span>
             </div>
-            <div>
-              <Heart />
-              <span>{recipe.review_count} reviews</span>
+            <div className="flex items-center gap-2">
+              <Heart className="w-5 h-5 text-orange-600" />
+              <span className="font-medium">{recipe.review_count} reviews</span>
             </div>
-            <div>
-              <ChefHat />
-              <span>{recipe.difficulty || "Unknown"}</span>
+            <div className="flex items-center gap-2">
+              <ChefHat className="w-5 h-5 text-orange-600" />
+              <span className="font-medium">{recipe.difficulty || "Unknown"}</span>
             </div>
           </div>
 
-          <div>
+          <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h2>Ingredients</h2>
-              <ul>
+              <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
+              <ul className="space-y-2">
                 {recipe.ingredients.map((ingredient, index) => (
-                  <li key={index}>
-                    <div />
+                  <li key={index} className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-orange-600 mt-2 flex-shrink-0" />
                     <span>{ingredient.original_text}</span>
                   </li>
                 ))}
@@ -147,12 +150,12 @@ export function RecipeDetail() {
             </div>
 
             <div>
-              <h2>Instructions</h2>
-              <ol>
+              <h2 className="text-2xl font-semibold mb-4">Instructions</h2>
+              <ol className="space-y-3">
                 {recipe.instructions.map((instruction, index) => (
-                  <li key={index}>
-                    <span>
-                      {index + 1}
+                  <li key={index} className="flex gap-3">
+                    <span className="font-semibold text-orange-600 flex-shrink-0">
+                      {index + 1}.
                     </span>
                     <span>{instruction.text}</span>
                   </li>

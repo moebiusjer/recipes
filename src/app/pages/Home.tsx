@@ -29,21 +29,21 @@ export function Home() {
   const trendingRecipes = recipes.slice(3, 9);
 
   return (
-    <div>
-      <div>
-        <h1>Discover Amazing Recipes</h1>
-        <p>Browse recipes from other chefs!</p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-4">Discover Amazing Recipes</h1>
+        <p className="text-gray-600 text-lg">Browse recipes from other chefs!</p>
       </div>
 
       {isLoading ? (
-        <div>Loading recipes...</div>
+        <div className="text-center py-12 text-gray-500">Loading recipes...</div>
       ) : error ? (
-        <div>{error}</div>
+        <div className="text-center py-12 text-red-600">{error}</div>
       ) : (
         <>
-          <section>
-            <h2>Featured Recipes</h2>
-            <div>
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold mb-6">Featured Recipes</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {featuredRecipes.map((recipe) => (
                 <RecipeCard
                   key={recipe.id}
@@ -59,11 +59,11 @@ export function Home() {
           </section>
 
           <section>
-            <div>
-              <TrendingUp />
-              <h2>Trending Now</h2>
+            <div className="flex items-center gap-2 mb-6">
+              <TrendingUp className="w-6 h-6 text-blue-600" />
+              <h2 className="text-2xl font-semibold">Trending Now</h2>
             </div>
-            <div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {trendingRecipes.map((recipe) => (
                 <RecipeCard
                   key={recipe.id}

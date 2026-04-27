@@ -80,15 +80,15 @@ export function CreateRecipe() {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Create New Recipe</h1>
-        <p>Share your culinary creation with the world</p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2">Create New Recipe</h1>
+        <p className="text-gray-600 text-lg">Share your culinary creation with the world</p>
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">
+      <form onSubmit={handleSubmit} className="max-w-3xl">
+        <div className="mb-6">
+          <label htmlFor="title" className="block font-medium mb-2">
             Recipe Title *
           </label>
           <input
@@ -97,12 +97,13 @@ export function CreateRecipe() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g., Grandma's Chocolate Chip Cookies"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
             required
           />
         </div>
 
-        <div>
-          <label htmlFor="description">
+        <div className="mb-6">
+          <label htmlFor="description" className="block font-medium mb-2">
             Description
           </label>
           <textarea
@@ -110,51 +111,55 @@ export function CreateRecipe() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Brief description of your recipe..."
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
         </div>
 
-        <div>
-          <label htmlFor="imageUrl">
+        <div className="mb-6">
+          <label htmlFor="imageUrl" className="block font-medium mb-2">
             Recipe Image URL
           </label>
           <div>
-            <div>
-              <Upload />
+            <div className="flex items-center gap-2 px-4 py-2 border rounded-lg mb-4">
+              <Upload className="w-5 h-5 text-orange-600" />
               <input
                 id="imageUrl"
                 type="url"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
                 placeholder="https://example.com/image.jpg (optional)"
+                className="flex-1 focus:outline-none"
               />
             </div>
           </div>
           {imageUrl ? (
-            <div>
+            <div className="rounded-lg overflow-hidden">
               <img
                 src={imageUrl}
                 alt="Recipe preview"
                 onError={(e) => {
                   e.currentTarget.src = TURKEY_LEG_IMAGE;
                 }}
+                className="w-full h-64 object-cover"
               />
             </div>
           ) : (
-            <div>
+            <div className="text-center py-8 border-2 border-dashed rounded-lg bg-orange-50">
               <img
                 src={TURKEY_LEG_IMAGE}
                 alt="Default turkey leg"
+                className="w-32 h-32 mx-auto mb-3 object-cover"
               />
-              <p>
+              <p className="text-gray-600">
                 No image provided? We'll use a fun turkey leg icon by default!
               </p>
             </div>
           )}
         </div>
 
-        <div>
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
-            <label htmlFor="cookTime">
+            <label htmlFor="cookTime" className="block font-medium mb-2">
               Cook Time (minutes) *
             </label>
             <input
@@ -163,11 +168,12 @@ export function CreateRecipe() {
               value={cookTime}
               onChange={(e) => setCookTime(e.target.value)}
               placeholder="e.g., 30"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
               required
             />
           </div>
           <div>
-            <label htmlFor="servings">
+            <label htmlFor="servings" className="block font-medium mb-2">
               Servings *
             </label>
             <input
@@ -176,38 +182,42 @@ export function CreateRecipe() {
               value={servings}
               onChange={(e) => setServings(e.target.value)}
               placeholder="4"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
               required
             />
           </div>
         </div>
 
-        <div>
-          <div>
-            <label>Ingredients *</label>
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <label className="block font-medium">Ingredients *</label>
             <button
               type="button"
               onClick={addIngredient}
+              className="flex items-center gap-1 px-3 py-1 text-orange-600 border border-orange-600 rounded-lg hover:bg-orange-50 transition-colors text-sm"
             >
-              <Plus />
+              <Plus className="w-4 h-4" />
               Add Ingredient
             </button>
           </div>
-          <div>
+          <div className="space-y-2">
             {ingredients.map((ingredient, index) => (
-              <div key={index}>
+              <div key={index} className="flex gap-2">
                 <input
                   type="text"
                   value={ingredient}
                   onChange={(e) => updateIngredient(index, e.target.value)}
                   placeholder={`Ingredient ${index + 1}`}
+                  className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                   required
                 />
                 {ingredients.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeIngredient(index)}
+                    className="px-3 py-2 text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors"
                   >
-                    <X />
+                    <X className="w-4 h-4" />
                   </button>
                 )}
               </div>
@@ -215,35 +225,40 @@ export function CreateRecipe() {
           </div>
         </div>
 
-        <div>
-          <div>
-            <label>Instructions *</label>
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <label className="block font-medium">Instructions *</label>
             <button
               type="button"
               onClick={addInstruction}
+              className="flex items-center gap-1 px-3 py-1 text-orange-600 border border-orange-600 rounded-lg hover:bg-orange-50 transition-colors text-sm"
             >
-              <Plus />
+              <Plus className="w-4 h-4" />
               Add Step
             </button>
           </div>
-          <div>
+          <div className="space-y-3">
             {instructions.map((instruction, index) => (
-              <div key={index}>
-                <div>
+              <div key={index} className="flex gap-3">
+                <div className="flex-shrink-0 w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-semibold">
                   {index + 1}
                 </div>
-                <textarea
-                  value={instruction}
-                  onChange={(e) => updateInstruction(index, e.target.value)}
-                  placeholder={`Step ${index + 1} instructions...`}
-                  required
-                />
+                <div className="flex-1">
+                  <textarea
+                    value={instruction}
+                    onChange={(e) => updateInstruction(index, e.target.value)}
+                    placeholder={`Step ${index + 1} instructions...`}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    required
+                  />
+                </div>
                 {instructions.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeInstruction(index)}
+                    className="flex-shrink-0 px-3 py-2 text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors"
                   >
-                    <X />
+                    <X className="w-4 h-4" />
                   </button>
                 )}
               </div>
@@ -251,21 +266,23 @@ export function CreateRecipe() {
           </div>
         </div>
 
-        <div>
+        <div className="flex gap-3">
           <button
             type="submit"
             disabled={isSubmitting}
+            className="flex-1 bg-orange-600 hover:bg-orange-700 disabled:opacity-50 text-white py-3 px-6 rounded-lg transition-colors font-medium"
           >
             {isSubmitting ? "Publishing..." : "Publish Recipe"}
           </button>
           <button
             type="button"
             onClick={handleReset}
+            className="px-6 py-3 border rounded-lg hover:bg-gray-50 transition-colors font-medium"
           >
             Reset
           </button>
         </div>
-        {error ? <p>{error}</p> : null}
+        {error ? <p className="mt-4 text-red-600">{error}</p> : null}
       </form>
     </div>
   );

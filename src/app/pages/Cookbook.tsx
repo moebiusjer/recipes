@@ -52,31 +52,31 @@ export function Cookbook() {
   }
 
   return (
-    <div>
-      <div>
-        <h1>My Cookbook</h1>
-        <p>Your personal collection of recipes</p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2">My Cookbook</h1>
+        <p className="text-gray-600 text-lg">Your personal collection of recipes</p>
       </div>
 
-      <div>
-        <div>
-          <Bookmark />
-          <h3>{cookbook.stats.saved_count}</h3>
-          <p>Saved Recipes</p>
+      <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg p-6 shadow-md">
+          <Bookmark className="w-12 h-12 mb-3 opacity-90" />
+          <h3 className="text-2xl font-semibold mb-1">{cookbook.stats.saved_count}</h3>
+          <p className="opacity-90">Saved Recipes</p>
         </div>
-        <div>
-          <ChefHat />
-          <h3>{cookbook.stats.posted_count}</h3>
-          <p>My Created Recipes</p>
+        <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6 shadow-md">
+          <ChefHat className="w-12 h-12 mb-3 opacity-90" />
+          <h3 className="text-2xl font-semibold mb-1">{cookbook.stats.posted_count}</h3>
+          <p className="opacity-90">My Created Recipes</p>
         </div>
       </div>
 
-      <section>
-        <div>
-          <Bookmark />
-          <h2>Saved Recipes</h2>
+      <section className="mb-12">
+        <div className="flex items-center gap-3 mb-6">
+          <Bookmark className="w-6 h-6 text-orange-600" />
+          <h2 className="text-2xl font-semibold">Saved Recipes</h2>
         </div>
-        <div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {cookbook.saved.map((recipe) => (
             <RecipeCard key={recipe.id} {...toCardRecipe(recipe)} />
           ))}
@@ -84,11 +84,11 @@ export function Cookbook() {
       </section>
 
       <section>
-        <div>
-          <ChefHat />
-          <h2>My Created Recipes</h2>
+        <div className="flex items-center gap-3 mb-6">
+          <ChefHat className="w-6 h-6 text-blue-600" />
+          <h2 className="text-2xl font-semibold">My Created Recipes</h2>
         </div>
-        <div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {cookbook.posted.map((recipe) => (
             <RecipeCard key={recipe.id} {...toCardRecipe(recipe)} />
           ))}
