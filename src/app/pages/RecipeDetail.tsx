@@ -33,7 +33,7 @@ export function RecipeDetail() {
           setIsSaved(false);
         }
       } catch {
-        setError("Could not load recipe details.");
+        setError("Could not load recipe.");
       } finally {
         setIsLoading(false);
       }

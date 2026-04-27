@@ -27,8 +27,8 @@ export function Login() {
     } catch {
       setError(
         mode === "signin"
-          ? "Login failed. Please check your email and password."
-          : "Account creation failed. Try a different username or email.",
+          ? "Login failed. Please check email and password."
+          : "Account creation failed. Try different username or email.",
       );
     } finally {
       setIsSubmitting(false);
