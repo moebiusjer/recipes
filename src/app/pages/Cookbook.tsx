@@ -34,7 +34,7 @@ export function Cookbook() {
         const data = await fetchCookbook();
         setCookbook(data);
       } catch {
-        setError("Could not load cookbook data.");
+        setError("Could not load cookbook.");
       } finally {
         setIsLoading(false);
       }

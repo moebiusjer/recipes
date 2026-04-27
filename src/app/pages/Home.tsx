@@ -16,7 +16,7 @@ export function Home() {
         const data = await fetchRecipes();
         setRecipes(data);
       } catch {
-        setError("Could not load recipes.");
+        setError("Couldn't load recipes. Check database :(");
       } finally {
         setIsLoading(false);
       }
@@ -24,6 +24,7 @@ export function Home() {
 
     void loadRecipes();
   }, []);
+
 
   const featuredRecipes = recipes.slice(0, 3);
   const trendingRecipes = recipes.slice(3, 9);
